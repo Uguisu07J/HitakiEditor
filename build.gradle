@@ -6,7 +6,7 @@
  */
 
 plugins {
-    id "org.beryx.runtime" version "1.12.7"
+    id "application"
 }
 
 repositories {
