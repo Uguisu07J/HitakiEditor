@@ -5,50 +5,45 @@
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.3/samples
  */
 
+
+
 plugins {
-    id "application"
-    id "org.panteleyev.jpackageplugin" version "1.3.1"
+    id 'org.beryx.runtime' version '1.12.7'
 }
+
+version = '2.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "com.formdev:flatlaf:1.6.2"
+    implementation 'com.formdev:flatlaf:1.6.2'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'ch.qos.logback:logback-classic:1.1.3'
 }
 
 application {
-    mainClass = "com.github.uguisu32j.hitakieditor.HitakiEditor"
+    mainClass = 'com.github.uguisu32j.hitakieditor.HitakiEditor'
 }
 
 jar {
-    archiveBaseName = "hitakieditor"
-    archiveVersion = "1.0"
+    archiveBaseName = 'hitakieditor'
     manifest {
-        attributes "Main-Class": "com.github.uguisu32j.hitakieditor.HitakiEditor"
+        attributes 'Main-Class': 'com.github.uguisu32j.hitakieditor.HitakiEditor'
     }
 }
 
-task("copyDependencies", Copy::class) {
-    from(configurations.runtimeClasspath).into("$buildDir/jars")
-}
-
-task("copyJar", Copy::class) {
-    from(tasks.jar).into("$buildDir/jars")
-}
-
-tasks.jpackage {
-    dependsOn("build", "copyDependencies", "copyJar")
-
-    input  = "$buildDir/jars"
-    destination = "$buildDir/dist"
-
-    appName = "Non-Modular Application"
-    vendor = "app.org"
-
-    mainJar = tasks.jar.get().archiveFileName.get()
-    mainClass = "org.app.MainClass"
-
-    javaOptions = listOf("-Dfile.encoding=UTF-8")
+runtime {
+    jpackage {
+        //--icon
+        //windowsのインストーラーのカスタマイズ
+        //resourcesフォルダ
+        /*def currentOs = org.gradle.internal.os.OperatingSystem.current()
+        if(currentOs.windows) {
+            installerType = 'exe'
+        } else if (currentOs.macOsX) {
+            installerType = 'dmg'
+        }*/
+    }
 }
