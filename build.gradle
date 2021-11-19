@@ -36,9 +36,9 @@ jar {
 
 runtime {
     jpackage {
-        //--icon
+        //--icon たぶん/jpackageか/iconかに
         //windowsのインストーラーのカスタマイズ
-        //resourcesフォルダ
+        //classpathとresourcesフォルダ
         /*def currentOs = org.gradle.internal.os.OperatingSystem.current()
         if(currentOs.windows) {
             installerType = 'exe'
