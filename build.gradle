@@ -36,15 +36,14 @@ jar {
 
 runtime {
     jpackage {
-        //--icon たぶん/jpackageか/iconかに
-        //classpathとresourcesフォルダ
         def currentOs = OperatingSystem.current()
         if(currentOs.windows) {
             imageOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
+            // imageOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install', 'icon/HitakiEditor.ico']
         } else if (currentOs.macOsX) {
-            
+            // imageOptions = ['icon/HitakiEditor.icns']
         } else if (currentOs.linux) {
-            
+            // imageOptions = ['icon/HitakiEditor.png']
         }
     }
 }
