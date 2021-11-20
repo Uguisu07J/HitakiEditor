@@ -5,7 +5,7 @@
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.3/samples
  */
 
-
+import org.gradle.internal.os.OperatingSystem;
 
 plugins {
     id 'org.beryx.runtime' version '1.12.7'
@@ -37,13 +37,14 @@ jar {
 runtime {
     jpackage {
         //--icon たぶん/jpackageか/iconかに
-        //windowsのインストーラーのカスタマイズ
         //classpathとresourcesフォルダ
-        /*def currentOs = org.gradle.internal.os.OperatingSystem.current()
+        def currentOs = OperatingSystem.current()
         if(currentOs.windows) {
-            installerType = 'exe'
+            imageOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
         } else if (currentOs.macOsX) {
-            installerType = 'dmg'
-        }*/
+            
+        } else if (currentOs.linux) {
+            
+        }
     }
 }
