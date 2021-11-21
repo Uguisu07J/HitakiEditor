@@ -11,14 +11,14 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class StatusBar extends JPanel {
-	private EditorPane editorPane;
+	private CodePane editorPane;
 	private PositionPanel positionPanel = new PositionPanel();
 	private DataPanel<Charset> encodingPanel = new DataPanel<>("エンコーディング", Charset.forName("UTF-8"),
 			Charset.availableCharsets().values().toArray(Charset[]::new));
 	private DataPanel<EndOfLine> endOfLinePanel = new DataPanel<>("改行コード", EndOfLine.getDefault(), EndOfLine.values());
 	private DataPanel<EditorMode> modePanel = new DataPanel<>("言語モード", EditorMode.NONE, EditorMode.values());
 
-	public StatusBar(EditorPane editorPane) {
+	public StatusBar(CodePane editorPane) {
 		this.editorPane = editorPane;
 		setLayout(new FlowLayout(FlowLayout.RIGHT));
 		setFocusable(false);
