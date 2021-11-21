@@ -37,17 +37,17 @@ public class HitakiEditor {
 
 	private static void initSettings() {
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		SETTINGS.putIfAbsent("frame.editor.x", String.valueOf(rect.x));
-		SETTINGS.putIfAbsent("frame.editor.y", String.valueOf(rect.y));
-		SETTINGS.putIfAbsent("frame.editor.width", String.valueOf(rect.width));
-		SETTINGS.putIfAbsent("frame.editor.height", String.valueOf(rect.height));
-		SETTINGS.putIfAbsent("frame.config.x", String.valueOf(rect.x / 2 - 200));
-		SETTINGS.putIfAbsent("frame.config.y", String.valueOf(rect.y / 2 - 200));
-		SETTINGS.putIfAbsent("frame.config.width", "400");
-		SETTINGS.putIfAbsent("frame.config.height", "400");
-		SETTINGS.putIfAbsent("frame.search.x", String.valueOf(rect.x / 2 - 200));
-		SETTINGS.putIfAbsent("frame.search.y", String.valueOf(rect.y / 2 - 200));
-		SETTINGS.putIfAbsent("frame.search.width", "400");
-		SETTINGS.putIfAbsent("frame.search.height", "400");
+		SETTINGS.putIfAbsent("frame.editor.x", String.valueOf(rect.x + 100));
+		SETTINGS.putIfAbsent("frame.editor.y", String.valueOf(rect.y + 100));
+		SETTINGS.putIfAbsent("frame.editor.width", String.valueOf(rect.width / 3 * 2));
+		SETTINGS.putIfAbsent("frame.editor.height", String.valueOf(rect.height / 3 * 2));
+		// SETTINGS.putIfAbsent("frame.config.x", String.valueOf(rect.x / 2 - 200));
+		// SETTINGS.putIfAbsent("frame.config.y", String.valueOf(rect.y / 2 - 200));
+		// SETTINGS.putIfAbsent("frame.config.width", "400");
+		// SETTINGS.putIfAbsent("frame.config.height", "400");
+		// SETTINGS.putIfAbsent("frame.search.x", String.valueOf(rect.x / 2 - 200));
+		// SETTINGS.putIfAbsent("frame.search.y", String.valueOf(rect.y / 2 - 200));
+		// SETTINGS.putIfAbsent("frame.search.width", "400");
+		// SETTINGS.putIfAbsent("frame.search.height", "400");
 	}
 }
