@@ -18,8 +18,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.formdev:flatlaf:1.6.2'
-    implementation 'ch.qos.logback:logback-classic:1.1.3'
+    implementation 'com.formdev:flatlaf:1.6.4'
+    implementation 'ch.qos.logback:logback-classic:1.2.7'
 }
 
 application {
@@ -37,8 +37,8 @@ runtime {
     jpackage {
         def currentOs = OperatingSystem.current()
         if(currentOs.windows) {
-            imageOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
-            // imageOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install', '--icon', 'icon/HitakiEditor.ico']
+            installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
+            // imageOptions = ['--icon', 'icon/HitakiEditor.ico']
         } else if (currentOs.macOsX) {
             // imageOptions = ['--icon', 'icon/HitakiEditor.icns']
         } else if (currentOs.linux) {
