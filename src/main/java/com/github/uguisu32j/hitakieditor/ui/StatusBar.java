@@ -54,9 +54,12 @@ public class StatusBar extends JPanel {
 			addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					DataPanel.this.data = JOptionPane.showInputDialog(null, type + "を選択してください", type,
+					Object o = JOptionPane.showInputDialog(null, type + "を選択してください", type,
 							JOptionPane.INFORMATION_MESSAGE, null, list, DataPanel.this.data);
-					setText(DataPanel.this.data.toString());
+					if (o != null) {
+						DataPanel.this.data = o;
+						setText(DataPanel.this.data.toString());
+					}
 				}
 			});
 		}
