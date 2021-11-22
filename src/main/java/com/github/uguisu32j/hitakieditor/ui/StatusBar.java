@@ -21,7 +21,6 @@ public class StatusBar extends JPanel {
 	public StatusBar(CodePane editorPane) {
 		this.editorPane = editorPane;
 		setLayout(new FlowLayout(FlowLayout.RIGHT));
-		setFocusable(false);
 		add(positionPanel);
 		add(encodingPanel);
 		add(endOfLinePanel);
@@ -31,6 +30,7 @@ public class StatusBar extends JPanel {
 	public void setPosition(int line, int colomn) {
 		positionPanel.line = line;
 		positionPanel.colomn = colomn;
+		positionPanel.updateData();
 	}
 
 	public void setMode(EditorMode mode) {
@@ -49,8 +49,8 @@ public class StatusBar extends JPanel {
 		private Object data;
 
 		private DataPanel(String type, T data, T[] list) {
+			super(data.toString());
 			this.data = data;
-			setText(data.toString());
 			addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -66,11 +66,11 @@ public class StatusBar extends JPanel {
 	}
 
 	private class PositionPanel extends JLabel {
-		private int line;
-		private int colomn;
+		private int line = 0;
+		private int colomn = 0;
 
 		private PositionPanel() {
-			setText("行 " + line + " 列 " + colomn);
+			super("行 0 列 0");
 			addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -79,9 +79,13 @@ public class StatusBar extends JPanel {
 					editorPane.setLine(line);
 					PositionPanel.this.line = line;
 					colomn = 0;
-					setText("行 " + line + "  列 " + colomn);
+					updateData();
 				}
 			});
+		}
+
+		private void updateData() {
+			setText("行 " + line + "  列 " + colomn);
 		}
 	}
 }
