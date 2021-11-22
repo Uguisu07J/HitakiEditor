@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.nio.charset.Charset;
 
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,8 +23,11 @@ public class StatusBar extends JPanel {
 		this.editorPane = editorPane;
 		setLayout(new FlowLayout(FlowLayout.RIGHT));
 		add(positionPanel);
+		add(Box.createGlue());
 		add(encodingPanel);
+		add(Box.createGlue());
 		add(endOfLinePanel);
+		add(Box.createGlue());
 		add(modePanel);
 	}
 
