@@ -55,10 +55,10 @@ public class HitakiEditor {
 	private static Properties getDefaultSettings() {
 		Properties defaults = new Properties();
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		defaults.setProperty("frame.editor.x", String.valueOf(rect.x));
-		defaults.setProperty("frame.editor.y", String.valueOf(rect.y));
-		defaults.setProperty("frame.editor.width", String.valueOf(rect.width));
-		defaults.setProperty("frame.editor.height", String.valueOf(rect.height));
+		defaults.setProperty("frame.editor.x", String.valueOf(rect.x + 100));
+		defaults.setProperty("frame.editor.y", String.valueOf(rect.y + 100));
+		defaults.setProperty("frame.editor.width", String.valueOf(rect.width / 3 * 2));
+		defaults.setProperty("frame.editor.height", String.valueOf(rect.height / 3 * 2));
 		return defaults;
 	}
 }
