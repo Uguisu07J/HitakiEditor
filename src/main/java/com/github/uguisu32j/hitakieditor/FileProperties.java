@@ -10,22 +10,22 @@ import java.util.Properties;
 
 @SuppressWarnings("serial")
 public class FileProperties extends Properties {
-	File file;
+    File file;
 
-	public FileProperties(Properties defaults, String path) {
-		super(defaults);
-		file = new File(path);
-	}
+    public FileProperties(Properties defaults, String path) {
+        super(defaults);
+        file = new File(path);
+    }
 
-	public void load() throws IOException {
-		load(new BufferedReader(new FileReader(file)));
-	}
+    public void load() throws IOException {
+        load(new BufferedReader(new FileReader(file)));
+    }
 
-	public void store() throws IOException {
-		store(new BufferedWriter(new FileWriter(file)), null);
-	}
+    public void store() throws IOException {
+        store(new BufferedWriter(new FileWriter(file)), null);
+    }
 
-	public void clean() {
-		entrySet().removeIf(e -> e.getValue().equals(defaults.get(e.getKey())));
-	}
+    public void clean() {
+        entrySet().removeIf(e -> e.getValue().equals(defaults.get(e.getKey())));
+    }
 }

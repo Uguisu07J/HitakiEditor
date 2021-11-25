@@ -1,13 +1,13 @@
 package com.github.uguisu32j.hitakieditor.ui;
 
 public enum EditorMode {
-	NONE;
+    NONE;
 
-	@Override
-	public String toString() {
-		String name = switch (this) {
-		case NONE -> "None";
-		};
-		return name;
-	}
+    @Override
+    public String toString() {
+        String name = switch (this) {
+        case NONE -> "None";
+        };
+        return name;
+    }
 }
