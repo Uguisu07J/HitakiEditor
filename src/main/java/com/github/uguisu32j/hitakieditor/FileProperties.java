@@ -1,31 +1,25 @@
 package com.github.uguisu32j.hitakieditor;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 
 @SuppressWarnings("serial")
 public class FileProperties extends Properties {
-    File file;
+    private Path path;
 
-    public FileProperties(Properties defaults, String path) {
+    public FileProperties(Properties defaults, Path path) {
         super(defaults);
-        file = new File(path);
+        this.path = path;
     }
 
     public void load() throws IOException {
-        load(new BufferedReader(new FileReader(file)));
+        load(Files.newBufferedReader(path));
     }
 
     public void store() throws IOException {
-        store(new BufferedWriter(new FileWriter(file)), null);
-    }
-
-    public void clean() {
         entrySet().removeIf(e -> e.getValue().equals(defaults.get(e.getKey())));
+        store(Files.newBufferedWriter(path), null);
     }
 }
