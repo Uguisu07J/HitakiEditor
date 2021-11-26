@@ -18,7 +18,7 @@ public class HitakiEditor {
     public static final String VERSION = "1.0.0";
     private static final String APP_DATA = getAppData();
     public static final FileProperties SETTINGS = new FileProperties(getDefaultSettings(),
-            APP_DATA + "/settings.properties");
+            Path.of(APP_DATA, "settings.properties"));
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -46,7 +46,7 @@ public class HitakiEditor {
         String home = System.getProperty("user.home");
         String appData = switch (System.getProperty("os.name")) {
         case "Mac OS X" -> home + "/Library/Application Support/HitakiEditor";
-        case "Windows" -> home + "/AppData/Roaming/HitakiEditor";
+        case "Windows" -> System.getenv("APPDATA") + "/HitakiEditor";
         default -> home + "/.hitakieditor";
         };
         return appData;
