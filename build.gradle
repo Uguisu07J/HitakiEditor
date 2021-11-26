@@ -37,11 +37,16 @@ runtime {
     jpackage {
         def currentOs = OperatingSystem.current()
         if(currentOs.windows) {
+            installerName = 'HitakiEditor-Windows'
+            installerType = 'exe'
             installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
             // imageOptions = ['--icon', 'icon/HitakiEditor.ico']
         } else if (currentOs.macOsX) {
+            installerName = 'HitakiEditor-Mac'
+            installerType = 'dmg'
             // imageOptions = ['--icon', 'icon/HitakiEditor.icns']
         } else if (currentOs.linux) {
+            installerName = 'HitakiEditor-Linux'
             // imageOptions = ['--icon', 'icon/HitakiEditor.png']
         }
     }
