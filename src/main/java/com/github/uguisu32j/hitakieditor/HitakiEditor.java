@@ -11,6 +11,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.formdev.flatlaf.FlatLightLaf;
 import com.github.uguisu32j.hitakieditor.ui.EditorFrame;
 
@@ -19,23 +22,33 @@ public class HitakiEditor {
     private static final String APP_DATA = getAppData();
     public static final FileProperties SETTINGS = new FileProperties(getDefaultSettings(),
             Path.of(APP_DATA, "settings.properties"));
+    private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Starting HitakiEditor " + VERSION);
+            }
             if (Files.notExists(Path.of(APP_DATA))) {
                 try {
                     Files.createDirectories(Path.of(APP_DATA));
                 } catch (IOException e) {
+                    if (LOGGER.isErrorEnabled()) {
+                        LOGGER.error("Failed to create " + APP_DATA, e);
+                    }
+                    return;
                 }
             }
             try {
                 SETTINGS.load();
             } catch (IOException e) {
+                LOGGER.error("Failed to load settings");
             }
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             try {
                 UIManager.setLookAndFeel(new FlatLightLaf());
             } catch (UnsupportedLookAndFeelException e) {
+                LOGGER.error("Failed to set LookAndFeel");
                 return;
             }
             new EditorFrame();
