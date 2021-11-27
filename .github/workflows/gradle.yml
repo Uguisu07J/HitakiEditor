@@ -60,4 +60,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: HitakiEditor Linux
-        path: build/jpackage/hitakieditor-linux-*.*
+        path: build/jpackage/hitakieditor-linux-*
