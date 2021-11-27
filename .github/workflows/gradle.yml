@@ -38,7 +38,7 @@ jobs:
         distribution: 'temurin'
         cache: gradle　
     - name: Run JPackage with Gradle
-      run: gradlew jpackage
+      run: .\gradlew jpackage
     - uses: actions/upload-artifact@v2
       with:
         name: HitakiEditor Windows
@@ -60,4 +60,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: HitakiEditor Linux
-        path: build/jpackage
+        path: build/jpackage/hitakieditor-linux-*.*
