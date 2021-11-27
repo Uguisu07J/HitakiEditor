@@ -38,7 +38,7 @@ jobs:
         distribution: 'temurin'
         cache: gradle　
     - name: Run JPackage with Gradle
-      run: .\gradlew jpackage
+      run: .\gradlew jpackage --no-daemon
     - uses: actions/upload-artifact@v2
       with:
         name: Windows
