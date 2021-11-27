@@ -60,5 +60,6 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: HitakiEditor Linux
-        path: build/jpackage/hitakieditor-linux-*.rpm
-              build/jpackage/hitakieditor-linux_*.deb
+        path: |
+          build/jpackage/hitakieditor-linux-*.rpm
+          build/jpackage/hitakieditor-linux_*.deb
