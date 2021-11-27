@@ -42,7 +42,7 @@ runtime {
             installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
             // imageOptions = ['--icon', 'icon/HitakiEditor.ico']
         } else if (currentOs.macOsX) {
-            installerName = 'HitakiEditor-Mac'
+            installerName = 'HitakiEditor-macOS'
             installerType = 'dmg'
             // imageOptions = ['--icon', 'icon/HitakiEditor.icns']
         } else if (currentOs.linux) {
