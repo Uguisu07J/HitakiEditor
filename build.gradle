@@ -46,8 +46,8 @@ runtime {
             installerType = 'dmg'
             // imageOptions = ['--icon', 'icon/HitakiEditor.icns']
         } else if (currentOs.linux) {
-            installerName = 'HitakiEditor-Linux'
-            installerOptions = ['--linux-package-name', 'HitakiEditor']
+            installerName = 'hitakieditor-linux'
+            installerOptions = ['--linux-package-name', 'hitakieditor']
             // imageOptions = ['--icon', 'icon/HitakiEditor.png']
         }
     }
