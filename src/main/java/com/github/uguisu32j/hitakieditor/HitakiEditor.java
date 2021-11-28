@@ -51,7 +51,7 @@ public class HitakiEditor {
                 LOGGER.error("Failed to set LookAndFeel");
                 return;
             }
-            new EditorFrame();
+            new EditorFrame(args.length > 0 ? Path.of(args[0]) : null);
         });
     }
 
