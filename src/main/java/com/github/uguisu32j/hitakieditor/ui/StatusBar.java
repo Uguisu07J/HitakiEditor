@@ -38,7 +38,7 @@ public class StatusBar extends JPanel {
     }
 
     public void setMode(EditorMode mode) {
-        this.modePanel.data = mode;
+        modePanel.data = mode;
     }
 
     public Charset getEncoding() {
@@ -58,10 +58,10 @@ public class StatusBar extends JPanel {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    Object o = JOptionPane.showInputDialog(null, type + "を選択してください", type,
+                    Object obj = JOptionPane.showInputDialog(null, type + "を選択してください", type,
                             JOptionPane.INFORMATION_MESSAGE, null, list, DataPanel.this.data);
-                    if (o != null) {
-                        DataPanel.this.data = o;
+                    if (obj != null) {
+                        DataPanel.this.data = obj;
                         setText(DataPanel.this.data.toString());
                     }
                 }
