@@ -2,6 +2,7 @@ package com.github.uguisu32j.hitakieditor.ui;
 
 import java.nio.file.Path;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 
 import org.slf4j.Logger;
@@ -38,7 +39,10 @@ public class CodePane extends JTextPane {
     }
 
     public void reopen() {
-        save();
+        if (JOptionPane.showConfirmDialog(null, "再度開く前に保存しますか？", "再度開く", JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
+            save();
+        }
         open();
     }
 }
