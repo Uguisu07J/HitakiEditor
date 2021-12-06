@@ -59,7 +59,7 @@ public class HitakiEditor {
         String home = System.getProperty("user.home");
         String appData = switch (System.getProperty("os.name")) {
             case "Mac OS X" -> home + "/Library/Application Support/HitakiEditor";
-            case "Windows" -> System.getenv("APPDATA") + "/HitakiEditor";
+            case "Windows" -> System.getenv("APPDATA") + "\\HitakiEditor";
             default -> home + "/.hitakieditor";
         };
         return appData;
