@@ -42,7 +42,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: Windows
-        path: build/jpackage
+        path: build\jpackage
   Linux:
     runs-on: ubuntu-latest
     steps:
