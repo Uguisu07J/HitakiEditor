@@ -13,6 +13,7 @@ public class CodePane extends JTextPane {
     private static final Logger LOGGER = LoggerFactory.getLogger(CodePane.class);
     private StatusBar statusBar;
     private Path path;
+    private boolean isModified = false;
 
     public CodePane(Path path) {
         if (LOGGER.isInfoEnabled() && path != null) {
@@ -20,6 +21,8 @@ public class CodePane extends JTextPane {
         }
         this.path = path;
         statusBar = new StatusBar(this);
+
+        open();
     }
 
     public StatusBar getStatusBar() {
@@ -34,12 +37,13 @@ public class CodePane extends JTextPane {
 
     }
 
-    private void save() {
+    public void save() {
 
+        isModified = false;
     }
 
     public void reopen() {
-        if (JOptionPane.showConfirmDialog(null, "再度開く前に保存しますか？", "再度開く", JOptionPane.YES_NO_OPTION,
+        if (isModified && JOptionPane.showConfirmDialog(null, "再度開く前に保存しますか？", "再度開く", JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
             save();
         }
