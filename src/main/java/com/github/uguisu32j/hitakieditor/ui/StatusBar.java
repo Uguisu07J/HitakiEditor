@@ -89,7 +89,7 @@ public class StatusBar extends JPanel {
         }
 
         private void updateData() {
-            setText("行 " + line + "  列 " + colomn);
+            setText(String.format("行 %d  列 %d", line, colomn));
         }
     }
 }
