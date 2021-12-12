@@ -5,8 +5,9 @@ public enum EditorMode {
 
     @Override
     public String toString() {
-        return switch (this) {
+        String mode = switch (this) {
             case NONE -> "None";
         };
+        return mode;
     }
 }

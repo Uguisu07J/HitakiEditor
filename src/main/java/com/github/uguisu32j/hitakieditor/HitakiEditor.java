@@ -53,12 +53,12 @@ public class HitakiEditor {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             try {
                 String theme = SETTINGS.getProperty("lookandfeel.theme");
-                LookAndFeel lookAndFeel = switch (theme) {
+                LookAndFeel laf = switch (theme) {
                     case "FlatLightLaf" -> new FlatLightLaf();
                     case "FlatDarkLaf" -> new FlatDarkLaf();
                     default -> IntelliJTheme.createLaf(ClassLoader.getSystemResourceAsStream(theme));
                 };
-                UIManager.setLookAndFeel(lookAndFeel);
+                UIManager.setLookAndFeel(laf);
                 UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accentcolor"));
             } catch (UnsupportedLookAndFeelException | IOException e) {
                 LOGGER.error("Failed to set theme", e);
