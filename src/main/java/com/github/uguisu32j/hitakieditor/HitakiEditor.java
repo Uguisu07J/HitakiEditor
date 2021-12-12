@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.swing.LookAndFeel;
@@ -64,7 +65,7 @@ public class HitakiEditor {
                 LOGGER.error("Failed to set theme", e);
                 return;
             }
-            new EditorFrame(args.length > 0 ? Path.of(args[0]) : null);
+            new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
         });
     }
 

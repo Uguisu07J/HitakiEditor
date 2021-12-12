@@ -8,7 +8,7 @@ import com.github.uguisu32j.hitakieditor.HitakiEditor;
 
 @SuppressWarnings("serial")
 public class EditorFrame extends JFrame {
-    public EditorFrame(Path path) {
+    public EditorFrame(Path[] paths) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("frame.editor.x")),
                 Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("frame.editor.y")),
