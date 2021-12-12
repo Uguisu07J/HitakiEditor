@@ -14,7 +14,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.IntelliJTheme;
 import com.github.uguisu32j.hitakieditor.ui.EditorFrame;
 
 public class HitakiEditor {
@@ -43,14 +45,21 @@ public class HitakiEditor {
             }
             try {
                 SETTINGS.load();
+                WINDOW_SIZE.load();
             } catch (IOException e) {
-                LOGGER.error("Failed to load settings");
+                LOGGER.error("Failed to load settings", e);
             }
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             try {
-                UIManager.setLookAndFeel(new FlatLightLaf());
-            } catch (UnsupportedLookAndFeelException e) {
-                LOGGER.error("Failed to set LookAndFeel");
+                String lookandfeel = SETTINGS.getProperty("lookandfeel.theme");
+                switch (lookandfeel) {
+                    case "FlatLightLaf" -> UIManager.setLookAndFeel(new FlatLightLaf());
+                    case "FlatDarkLaf" -> UIManager.setLookAndFeel(new FlatDarkLaf());
+                    default -> UIManager.setLookAndFeel(
+                            IntelliJTheme.createLaf(ClassLoader.getSystemResourceAsStream(lookandfeel)));
+                }
+            } catch (UnsupportedLookAndFeelException | IOException e) {
+                LOGGER.error("Failed to set theme", e);
                 return;
             }
             new EditorFrame(args.length > 0 ? Path.of(args[0]) : null);
@@ -69,7 +78,8 @@ public class HitakiEditor {
 
     private static Properties getDefaultSettings() {
         Properties defaults = new Properties();
-
+        defaults.setProperty("lookandfeel.theme", "FlatLightLaf");
+        defaults.setProperty("lookandfeel.accentcolor", "#2675BF");
         return defaults;
     }
 
@@ -78,8 +88,8 @@ public class HitakiEditor {
         Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         defaults.setProperty("frame.editor.x", String.valueOf(rect.x + 100));
         defaults.setProperty("frame.editor.y", String.valueOf(rect.y + 100));
-        defaults.setProperty("frame.editor.width", String.valueOf(rect.width / 3 * 2));
-        defaults.setProperty("frame.editor.height", String.valueOf(rect.height / 3 * 2));
+        defaults.setProperty("frame.editor.width", String.valueOf(rect.width));
+        defaults.setProperty("frame.editor.height", String.valueOf(rect.height));
         return defaults;
     }
 }
