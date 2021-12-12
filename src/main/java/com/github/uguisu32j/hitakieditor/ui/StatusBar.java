@@ -74,7 +74,7 @@ public class StatusBar extends JPanel {
         private int colomn = 0;
 
         private PositionPanel() {
-            super("行 0 列 0");
+            super("行 0  列 0");
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
