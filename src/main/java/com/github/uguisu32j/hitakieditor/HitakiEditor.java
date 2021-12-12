@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
 
+import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -51,13 +52,14 @@ public class HitakiEditor {
             }
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             try {
-                String lookandfeel = SETTINGS.getProperty("lookandfeel.theme");
-                switch (lookandfeel) {
-                    case "FlatLightLaf" -> UIManager.setLookAndFeel(new FlatLightLaf());
-                    case "FlatDarkLaf" -> UIManager.setLookAndFeel(new FlatDarkLaf());
-                    default -> UIManager.setLookAndFeel(
-                            IntelliJTheme.createLaf(ClassLoader.getSystemResourceAsStream(lookandfeel)));
-                }
+                String theme = SETTINGS.getProperty("lookandfeel.theme");
+                LookAndFeel lookAndFeel = switch (theme) {
+                    case "FlatLightLaf" -> new FlatLightLaf();
+                    case "FlatDarkLaf" -> new FlatDarkLaf();
+                    default -> IntelliJTheme.createLaf(ClassLoader.getSystemResourceAsStream(theme));
+                };
+                UIManager.setLookAndFeel(lookAndFeel);
+                UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accentcolor"));
             } catch (UnsupportedLookAndFeelException | IOException e) {
                 LOGGER.error("Failed to set theme", e);
                 return;
