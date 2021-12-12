@@ -10,10 +10,10 @@ import com.github.uguisu32j.hitakieditor.HitakiEditor;
 public class EditorFrame extends JFrame {
     public EditorFrame(Path[] paths) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("frame.editor.x")),
-                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("frame.editor.y")),
-                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("frame.editor.width")),
-                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("frame.editor.height")));
+        setBounds(Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.x")),
+                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.y")),
+                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.width")),
+                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.height")));
         setVisible(true);
     }
 }

@@ -30,6 +30,7 @@ public class HitakiEditor {
             Path.of(APP_DATA, "settings.properties"));
     public static final FileProperties WINDOW_SIZE = new FileProperties(getDefaultWindowSize(),
             Path.of(APP_DATA, "window.properties"));
+
     private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
 
     public static void main(String[] args) {
@@ -93,10 +94,10 @@ public class HitakiEditor {
     private static Properties getDefaultWindowSize() {
         Properties defaults = new Properties();
         Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        defaults.setProperty("frame.editor.x", String.valueOf(rect.x + 100));
-        defaults.setProperty("frame.editor.y", String.valueOf(rect.y + 100));
-        defaults.setProperty("frame.editor.width", String.valueOf(rect.width));
-        defaults.setProperty("frame.editor.height", String.valueOf(rect.height));
+        defaults.setProperty("editor.x", String.valueOf(rect.x + 100));
+        defaults.setProperty("editor.y", String.valueOf(rect.y + 100));
+        defaults.setProperty("editor.width", String.valueOf(rect.width));
+        defaults.setProperty("editor.height", String.valueOf(rect.height));
         return defaults;
     }
 }
