@@ -16,7 +16,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.IntelliJTheme;
 import com.github.uguisu32j.hitakieditor.ui.EditorFrame;
@@ -55,8 +57,10 @@ public class HitakiEditor {
             try {
                 String theme = SETTINGS.getProperty("lookandfeel.theme");
                 LookAndFeel laf = switch (theme) {
-                    case "FlatLightLaf" -> new FlatLightLaf();
-                    case "FlatDarkLaf" -> new FlatDarkLaf();
+                    case "Light" -> new FlatLightLaf();
+                    case "Dark" -> new FlatDarkLaf();
+                    case "IntelliJ" -> new FlatIntelliJLaf();
+                    case "Darcula" -> new FlatDarculaLaf();
                     default -> IntelliJTheme.createLaf(ClassLoader.getSystemResourceAsStream(theme));
                 };
                 UIManager.setLookAndFeel(laf);
@@ -81,7 +85,7 @@ public class HitakiEditor {
 
     private static Properties getDefaultSettings() {
         Properties defaults = new Properties();
-        defaults.setProperty("lookandfeel.theme", "FlatLightLaf");
+        defaults.setProperty("lookandfeel.theme", "Light");
         defaults.setProperty("lookandfeel.accentcolor", "#2675BF");
         return defaults;
     }
