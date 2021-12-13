@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
@@ -30,7 +32,7 @@ public class HitakiEditor {
             Path.of(APP_DATA, "settings.properties"));
     public static final FileProperties WINDOW_SIZE = new FileProperties(getDefaultWindowSize(),
             Path.of(APP_DATA, "window.properties"));
-
+    public static final ResourceBundle LANG = ResourceBundle.getBundle("lang", Locale.getDefault());
     private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
 
     public static void main(String[] args) {
@@ -65,7 +67,7 @@ public class HitakiEditor {
                     default -> IntelliJTheme.createLaf(ClassLoader.getSystemResourceAsStream(theme));
                 };
                 UIManager.setLookAndFeel(laf);
-                UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accentcolor"));
+                UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accent_color"));
             } catch (UnsupportedLookAndFeelException | IOException e) {
                 LOGGER.error("Failed to set theme", e);
                 return;
@@ -87,7 +89,7 @@ public class HitakiEditor {
     private static Properties getDefaultSettings() {
         Properties defaults = new Properties();
         defaults.setProperty("lookandfeel.theme", "Light");
-        defaults.setProperty("lookandfeel.accentcolor", "#2675BF");
+        defaults.setProperty("lookandfeel.accent_color", "#2675BF");
         return defaults;
     }
 

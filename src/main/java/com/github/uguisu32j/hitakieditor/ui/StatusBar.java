@@ -10,14 +10,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.github.uguisu32j.hitakieditor.HitakiEditor;
+
 @SuppressWarnings("serial")
 public class StatusBar extends JPanel {
     private CodePane editorPane;
     private PositionPanel positionPanel = new PositionPanel();
-    private DataPanel<Charset> encodingPanel = new DataPanel<>("エンコーディング", Charset.forName("UTF-8"),
+    private DataPanel<Charset> encodingPanel = new DataPanel<>(HitakiEditor.LANG.getString("statusbar.encoding"),
+            HitakiEditor.LANG.getString("statusbar.encoding.select_encoding"), Charset.forName("UTF-8"),
             Charset.availableCharsets().values().toArray(Charset[]::new));
-    private DataPanel<EndOfLine> endOfLinePanel = new DataPanel<>("改行コード", EndOfLine.getDefault(), EndOfLine.values());
-    private DataPanel<EditorMode> modePanel = new DataPanel<>("言語モード", EditorMode.NONE, EditorMode.values());
+    private DataPanel<EndOfLineChar> endOfLineCharPanel = new DataPanel<>(
+            HitakiEditor.LANG.getString("statusbar.end_of_line_char"),
+            HitakiEditor.LANG.getString("statusbar.end_of_line_char.select_end_of_line_char"),
+            EndOfLineChar.getDefault(), EndOfLineChar.values());
+    private DataPanel<EditorMode> modePanel = new DataPanel<>(HitakiEditor.LANG.getString("statusbar.mode"),
+            HitakiEditor.LANG.getString("statusbar.mode.select_lang_mode"), EditorMode.NONE, EditorMode.values());
 
     public StatusBar(CodePane editorPane) {
         this.editorPane = editorPane;
@@ -26,7 +33,7 @@ public class StatusBar extends JPanel {
         add(Box.createGlue());
         add(encodingPanel);
         add(Box.createGlue());
-        add(endOfLinePanel);
+        add(endOfLineCharPanel);
         add(Box.createGlue());
         add(modePanel);
     }
@@ -45,21 +52,21 @@ public class StatusBar extends JPanel {
         return (Charset) encodingPanel.data;
     }
 
-    public EndOfLine getEndOfLine() {
-        return (EndOfLine) endOfLinePanel.data;
+    public EndOfLineChar getEndOfLine() {
+        return (EndOfLineChar) endOfLineCharPanel.data;
     }
 
     private class DataPanel<T> extends JLabel {
         private Object data;
 
-        private DataPanel(String type, T data, T[] list) {
+        private DataPanel(String type, String message, T data, T[] list) {
             super(data.toString());
             this.data = data;
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    Object obj = JOptionPane.showInputDialog(null, type + "を選択してください", type,
-                            JOptionPane.INFORMATION_MESSAGE, null, list, DataPanel.this.data);
+                    Object obj = JOptionPane.showInputDialog(null, message, type, JOptionPane.INFORMATION_MESSAGE, null,
+                            list, DataPanel.this.data);
                     if (obj != null) {
                         DataPanel.this.data = obj;
                         setText(DataPanel.this.data.toString());
@@ -74,11 +81,14 @@ public class StatusBar extends JPanel {
         private int colomn = 0;
 
         private PositionPanel() {
-            super("行 0  列 0");
+            super(HitakiEditor.LANG.getString("statusbar.position.line") + " 0  "
+                    + HitakiEditor.LANG.getString("statusbar.position.colomn") + " 0");
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    int line = Integer.parseInt(JOptionPane.showInputDialog(null, "移動する行番号を入力してください", "行の移動",
+                    int line = Integer.parseInt(JOptionPane.showInputDialog(null,
+                            HitakiEditor.LANG.getString("statusbar.position.type_a_line_number"),
+                            HitakiEditor.LANG.getString("statusbar.position.go_to_a_line"),
                             JOptionPane.INFORMATION_MESSAGE));
                     editorPane.setLine(line);
                     PositionPanel.this.line = line;
@@ -89,7 +99,8 @@ public class StatusBar extends JPanel {
         }
 
         private void updateData() {
-            setText(String.format("行 %d  列 %d", line, colomn));
+            setText(HitakiEditor.LANG.getString("statusbar.position.line") + " " + line + "  "
+                    + HitakiEditor.LANG.getString("statusbar.position.colomn") + " " + colomn);
         }
     }
 }
