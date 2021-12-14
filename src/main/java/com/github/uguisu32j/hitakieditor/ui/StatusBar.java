@@ -23,8 +23,8 @@ public class StatusBar extends JPanel {
             HitakiEditor.getUIString("statusbar.end_of_line_char"),
             HitakiEditor.getUIString("statusbar.end_of_line_char.select_end_of_line_char"), EndOfLineChar.getDefault(),
             EndOfLineChar.values());
-    private DataPanel<EditorMode> modePanel = new DataPanel<>(HitakiEditor.getUIString("statusbar.mode"),
-            HitakiEditor.getUIString("statusbar.mode.select_lang_mode"), EditorMode.NONE, EditorMode.values());
+    private DataPanel<LangMode> modePanel = new DataPanel<>(HitakiEditor.getUIString("statusbar.mode"),
+            HitakiEditor.getUIString("statusbar.mode.select_lang_mode"), LangMode.NONE, LangMode.values());
 
     public StatusBar(CodePane editorPane) {
         this.editorPane = editorPane;
@@ -44,7 +44,7 @@ public class StatusBar extends JPanel {
         positionPanel.updateData();
     }
 
-    public void setMode(EditorMode mode) {
+    public void setMode(LangMode mode) {
         modePanel.data = mode;
     }
 
