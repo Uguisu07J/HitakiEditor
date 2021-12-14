@@ -2,6 +2,7 @@ package com.github.uguisu32j.hitakieditor;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,8 +32,8 @@ public class HitakiEditor {
     public static final FileProperties SETTINGS = new FileProperties(getDefaultSettings(),
             Path.of(APP_DATA, "settings.properties"));
     public static final FileProperties WINDOW_SIZE = new FileProperties(getDefaultWindowSize(),
-            Path.of(APP_DATA, "window.properties"));
-    public static final ResourceBundle LANG = ResourceBundle.getBundle("lang", Locale.getDefault());
+            Path.of(APP_DATA, "window_size.properties"));
+    private static ResourceBundle LANG;
     private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
 
     public static void main(String[] args) {
@@ -64,7 +65,8 @@ public class HitakiEditor {
                     case "Dark" -> new FlatDarkLaf();
                     case "IntelliJ" -> new FlatIntelliJLaf();
                     case "Darcula" -> new FlatDarculaLaf();
-                    default -> IntelliJTheme.createLaf(ClassLoader.getSystemResourceAsStream(theme));
+                    default -> IntelliJTheme
+                            .createLaf(new BufferedInputStream(Files.newInputStream(Path.of(APP_DATA, theme))));
                 };
                 UIManager.setLookAndFeel(laf);
                 UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accent_color"));
@@ -72,6 +74,7 @@ public class HitakiEditor {
                 LOGGER.error("Failed to set theme", e);
                 return;
             }
+            LANG = ResourceBundle.getBundle("lang", new Locale(SETTINGS.getProperty("language")));
             new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
         });
     }
@@ -101,5 +104,9 @@ public class HitakiEditor {
         defaults.setProperty("editor.width", String.valueOf(rect.width));
         defaults.setProperty("editor.height", String.valueOf(rect.height));
         return defaults;
+    }
+
+    public static String getUIString(String key) {
+        return LANG.getString(key);
     }
 }

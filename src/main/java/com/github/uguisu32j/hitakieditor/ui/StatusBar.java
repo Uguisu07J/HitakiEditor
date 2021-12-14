@@ -16,15 +16,15 @@ import com.github.uguisu32j.hitakieditor.HitakiEditor;
 public class StatusBar extends JPanel {
     private CodePane editorPane;
     private PositionPanel positionPanel = new PositionPanel();
-    private DataPanel<Charset> encodingPanel = new DataPanel<>(HitakiEditor.LANG.getString("statusbar.encoding"),
-            HitakiEditor.LANG.getString("statusbar.encoding.select_encoding"), Charset.forName("UTF-8"),
+    private DataPanel<Charset> encodingPanel = new DataPanel<>(HitakiEditor.getUIString("statusbar.encoding"),
+            HitakiEditor.getUIString("statusbar.encoding.select_encoding"), Charset.forName("UTF-8"),
             Charset.availableCharsets().values().toArray(Charset[]::new));
     private DataPanel<EndOfLineChar> endOfLineCharPanel = new DataPanel<>(
-            HitakiEditor.LANG.getString("statusbar.end_of_line_char"),
-            HitakiEditor.LANG.getString("statusbar.end_of_line_char.select_end_of_line_char"),
-            EndOfLineChar.getDefault(), EndOfLineChar.values());
-    private DataPanel<EditorMode> modePanel = new DataPanel<>(HitakiEditor.LANG.getString("statusbar.mode"),
-            HitakiEditor.LANG.getString("statusbar.mode.select_lang_mode"), EditorMode.NONE, EditorMode.values());
+            HitakiEditor.getUIString("statusbar.end_of_line_char"),
+            HitakiEditor.getUIString("statusbar.end_of_line_char.select_end_of_line_char"), EndOfLineChar.getDefault(),
+            EndOfLineChar.values());
+    private DataPanel<EditorMode> modePanel = new DataPanel<>(HitakiEditor.getUIString("statusbar.mode"),
+            HitakiEditor.getUIString("statusbar.mode.select_lang_mode"), EditorMode.NONE, EditorMode.values());
 
     public StatusBar(CodePane editorPane) {
         this.editorPane = editorPane;
@@ -81,14 +81,14 @@ public class StatusBar extends JPanel {
         private int colomn = 0;
 
         private PositionPanel() {
-            super(HitakiEditor.LANG.getString("statusbar.position.line") + " 0  "
-                    + HitakiEditor.LANG.getString("statusbar.position.colomn") + " 0");
+            super(HitakiEditor.getUIString("statusbar.position.line") + " 0  "
+                    + HitakiEditor.getUIString("statusbar.position.colomn") + " 0");
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     int line = Integer.parseInt(JOptionPane.showInputDialog(null,
-                            HitakiEditor.LANG.getString("statusbar.position.type_a_line_number"),
-                            HitakiEditor.LANG.getString("statusbar.position.go_to_a_line"),
+                            HitakiEditor.getUIString("statusbar.position.type_a_line_number"),
+                            HitakiEditor.getUIString("statusbar.position.go_to_a_line"),
                             JOptionPane.INFORMATION_MESSAGE));
                     editorPane.setLine(line);
                     PositionPanel.this.line = line;
@@ -99,8 +99,8 @@ public class StatusBar extends JPanel {
         }
 
         private void updateData() {
-            setText(HitakiEditor.LANG.getString("statusbar.position.line") + " " + line + "  "
-                    + HitakiEditor.LANG.getString("statusbar.position.colomn") + " " + colomn);
+            setText(HitakiEditor.getUIString("statusbar.position.line") + " " + line + "  "
+                    + HitakiEditor.getUIString("statusbar.position.colomn") + " " + colomn);
         }
     }
 }
