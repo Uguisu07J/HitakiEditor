@@ -8,7 +8,7 @@ public enum LangMode {
     @Override
     public String toString() {
         String mode = switch (this) {
-            case NONE -> HitakiEditor.getUIString("statusbar.mode.none");
+            case NONE -> HitakiEditor.getUIString("statusbar.lang_mode.none");
         };
         return mode;
     }
