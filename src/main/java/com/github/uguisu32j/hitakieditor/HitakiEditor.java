@@ -74,7 +74,7 @@ public class HitakiEditor {
                 LOGGER.error("Failed to set theme", e);
                 return;
             }
-            LANG = ResourceBundle.getBundle("lang", new Locale(SETTINGS.getProperty("language")));
+            LANG = ResourceBundle.getBundle("lang", new Locale(SETTINGS.getProperty("lang")));
             new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
         });
     }
