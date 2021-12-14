@@ -65,8 +65,8 @@ public class HitakiEditor {
                     case "Dark" -> new FlatDarkLaf();
                     case "IntelliJ" -> new FlatIntelliJLaf();
                     case "Darcula" -> new FlatDarculaLaf();
-                    default -> IntelliJTheme
-                            .createLaf(new BufferedInputStream(Files.newInputStream(Path.of(APP_DATA, theme))));
+                    default -> IntelliJTheme.createLaf(
+                            new BufferedInputStream(Files.newInputStream(Path.of(APP_DATA, "themes", theme))));
                 };
                 UIManager.setLookAndFeel(laf);
                 UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accent_color"));
