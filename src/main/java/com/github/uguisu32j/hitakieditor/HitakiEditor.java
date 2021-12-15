@@ -42,20 +42,14 @@ public class HitakiEditor {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Thread.setDefaultUncaughtExceptionHandler((Thread t, Throwable e) -> {
-                if (LOGGER.isErrorEnabled()) {
-                    LOGGER.error("Uncaught Exception", e);
-                }
+                LOGGER.error("Uncaught Exception", e);
             });
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.info("Starting HitakiEditor " + VERSION);
-            }
+            LOGGER.info("Starting HitakiEditor " + VERSION);
             if (Files.notExists(Path.of(APP_DATA))) {
                 try {
                     Files.createDirectories(Path.of(APP_DATA));
                 } catch (IOException e) {
-                    if (LOGGER.isErrorEnabled()) {
-                        LOGGER.error("Failed to create " + APP_DATA, e);
-                    }
+                    LOGGER.error("Failed to create " + APP_DATA, e);
                     return;
                 }
             }
@@ -63,7 +57,7 @@ public class HitakiEditor {
                 SETTINGS.load();
                 WINDOW_SIZE.load();
             } catch (IOException e) {
-                LOGGER.error("Failed to load settings", e);
+                LOGGER.warn("Failed to load settings", e);
             } catch (IllegalStateException e) {
                 return;
             }
@@ -88,6 +82,7 @@ public class HitakiEditor {
                 LANG = ResourceBundle.getBundle("lang/lang", new Locale(SETTINGS.getProperty("lang")));
             } catch (MissingResourceException e) {
                 LOGGER.error("Missing resource", e);
+                return;
             }
             new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
         });

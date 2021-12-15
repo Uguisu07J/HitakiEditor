@@ -16,7 +16,7 @@ public class CodePane extends JTextPane {
     private boolean isModified = false;
 
     public CodePane(Path path) {
-        if (LOGGER.isInfoEnabled() && path != null) {
+        if (path != null) {
             LOGGER.info("Opening " + path);
         }
         this.path = path;
