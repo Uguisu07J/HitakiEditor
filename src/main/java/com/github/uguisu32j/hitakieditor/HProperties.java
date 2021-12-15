@@ -6,10 +6,10 @@ import java.nio.file.Path;
 import java.util.Properties;
 
 @SuppressWarnings("serial")
-public class FileProperties extends Properties {
+public class HProperties extends Properties {
     private Path path;
 
-    public FileProperties(Properties defaults, Path path) {
+    public HProperties(Properties defaults, Path path) {
         super(defaults);
         this.path = path;
     }

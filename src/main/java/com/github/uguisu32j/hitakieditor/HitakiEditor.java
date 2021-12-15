@@ -32,9 +32,9 @@ import com.github.uguisu32j.hitakieditor.ui.EditorFrame;
 public class HitakiEditor {
     public static final String VERSION = "1.0.0";
     private static final String APP_DATA = getAppData();
-    public static final FileProperties SETTINGS = new FileProperties(getDefaultSettings(),
+    public static final HProperties SETTINGS = new HProperties(getDefaultSettings(),
             Path.of(APP_DATA, "settings.properties"));
-    public static final FileProperties WINDOW_SIZE = new FileProperties(getDefaultWindowSize(),
+    public static final HProperties WINDOW_SIZE = new HProperties(getDefaultWindowSize(),
             Path.of(APP_DATA, "window_size.properties"));
     private static ResourceBundle LANG;
     private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
