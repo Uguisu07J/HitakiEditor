@@ -15,6 +15,9 @@ public class FileProperties extends Properties {
     }
 
     public void load() throws IOException {
+        if (defaults == null) {
+            throw new IllegalStateException();
+        }
         load(Files.newBufferedReader(path));
     }
 

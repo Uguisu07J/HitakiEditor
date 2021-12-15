@@ -3,7 +3,9 @@ package com.github.uguisu32j.hitakieditor;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -38,6 +40,11 @@ public class HitakiEditor {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            Thread.setDefaultUncaughtExceptionHandler((Thread t, Throwable e) -> {
+                if (LOGGER.isErrorEnabled()) {
+                    LOGGER.error("Uncaught Exception", e);
+                }
+            });
             if (LOGGER.isInfoEnabled()) {
                 LOGGER.info("Starting HitakiEditor " + VERSION);
             }
@@ -56,6 +63,8 @@ public class HitakiEditor {
                 WINDOW_SIZE.load();
             } catch (IOException e) {
                 LOGGER.error("Failed to load settings", e);
+            } catch (IllegalStateException e) {
+                return;
             }
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             try {
@@ -69,12 +78,12 @@ public class HitakiEditor {
                             new BufferedInputStream(Files.newInputStream(Path.of(APP_DATA, "themes", theme))));
                 };
                 UIManager.setLookAndFeel(laf);
-                UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accent_color"));
             } catch (UnsupportedLookAndFeelException | IOException e) {
-                LOGGER.error("Failed to set theme", e);
+                LOGGER.error("Failed to load theme", e);
                 return;
             }
-            LANG = ResourceBundle.getBundle("lang", new Locale(SETTINGS.getProperty("lang")));
+            UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accent_color"));
+            LANG = ResourceBundle.getBundle("lang/lang", new Locale(SETTINGS.getProperty("lang")));
             new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
         });
     }
@@ -91,8 +100,13 @@ public class HitakiEditor {
 
     private static Properties getDefaultSettings() {
         Properties defaults = new Properties();
-        defaults.setProperty("lookandfeel.theme", "Light");
-        defaults.setProperty("lookandfeel.accent_color", "#2675BF");
+        try {
+            defaults.load(new BufferedReader(
+                    new InputStreamReader(ClassLoader.getSystemResourceAsStream("default_settings.properties"))));
+        } catch (IOException e) {
+            LOGGER.error("Failed to load default settings", e);
+            return null;
+        }
         return defaults;
     }
 
