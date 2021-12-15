@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -83,7 +84,11 @@ public class HitakiEditor {
                 return;
             }
             UIManager.put("accentBaseColor", SETTINGS.getProperty("lookandfeel.accent_color"));
-            LANG = ResourceBundle.getBundle("lang/lang", new Locale(SETTINGS.getProperty("lang")));
+            try {
+                LANG = ResourceBundle.getBundle("lang/lang", new Locale(SETTINGS.getProperty("lang")));
+            } catch (MissingResourceException e) {
+                LOGGER.error("Missing resource", e);
+            }
             new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
         });
     }
