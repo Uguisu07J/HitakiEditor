@@ -1,10 +1,10 @@
 package com.github.uguisu32j.hitakieditor.ui;
 
-public enum EndOfLineChar {
+public enum EndOfLineSeq {
     LF, CRLF;
 
-    public static EndOfLineChar getDefault() {
-        EndOfLineChar eolc = switch (System.getProperty("line.separator")) {
+    public static EndOfLineSeq getDefault() {
+        EndOfLineSeq eolc = switch (System.getProperty("line.separator")) {
             case "\n" -> LF;
             case "\r\n" -> CRLF;
             default -> LF;

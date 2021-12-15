@@ -19,9 +19,9 @@ public class StatusBar extends JPanel {
     private DataPanel<Charset> encodingPanel = new DataPanel<>(HitakiEditor.getUIString("encoding"),
             HitakiEditor.getUIString("encoding.select_encoding"), Charset.forName("UTF-8"),
             Charset.availableCharsets().values().toArray(Charset[]::new));
-    private DataPanel<EndOfLineChar> endOfLineCharPanel = new DataPanel<>(HitakiEditor.getUIString("end_of_line_char"),
-            HitakiEditor.getUIString("end_of_line_char.select_end_of_line_char"), EndOfLineChar.getDefault(),
-            EndOfLineChar.values());
+    private DataPanel<EndOfLineSeq> endOfLineCharPanel = new DataPanel<>(HitakiEditor.getUIString("end_of_line_seq"),
+            HitakiEditor.getUIString("end_of_line_seq.select_end_of_line_seq"), EndOfLineSeq.getDefault(),
+            EndOfLineSeq.values());
     private DataPanel<LangMode> langModePanel = new DataPanel<>(HitakiEditor.getUIString("lang_mode"),
             HitakiEditor.getUIString("lang_mode.select_lang_mode"), LangMode.PLAIN, LangMode.values());
 
@@ -51,8 +51,8 @@ public class StatusBar extends JPanel {
         return (Charset) encodingPanel.data;
     }
 
-    public EndOfLineChar getEndOfLine() {
-        return (EndOfLineChar) endOfLineCharPanel.data;
+    public EndOfLineSeq getEndOfLine() {
+        return (EndOfLineSeq) endOfLineCharPanel.data;
     }
 
     private class DataPanel<T> extends JLabel {
@@ -85,9 +85,9 @@ public class StatusBar extends JPanel {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    int line = Integer.parseInt(JOptionPane.showInputDialog(null,
-                            HitakiEditor.getUIString("position.type_a_line_number"),
-                            HitakiEditor.getUIString("position.go_to_a_line"), JOptionPane.INFORMATION_MESSAGE));
+                    int line = Integer.parseInt(
+                            JOptionPane.showInputDialog(null, HitakiEditor.getUIString("position.type_a_line_number"),
+                                    HitakiEditor.getUIString("position.go_to_line"), JOptionPane.INFORMATION_MESSAGE));
                     editorPane.setLine(line);
                     PositionPanel.this.line = line;
                     colomn = 0;
