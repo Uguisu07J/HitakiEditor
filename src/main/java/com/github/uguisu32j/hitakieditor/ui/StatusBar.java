@@ -23,7 +23,7 @@ public class StatusBar extends JPanel {
             HitakiEditor.getUIString("end_of_line_seq.select_end_of_line_seq"), EndOfLineSeq.getDefault(),
             EndOfLineSeq.values());
     private DataPanel<LangMode> langModePanel = new DataPanel<>(HitakiEditor.getUIString("lang_mode"),
-            HitakiEditor.getUIString("lang_mode.select_lang_mode"), LangMode.PLAIN, LangMode.values());
+            HitakiEditor.getUIString("lang_mode.select_lang_mode"), LangMode.PLAIN_TEXT, LangMode.values());
 
     public StatusBar(CodePane editorPane) {
         this.editorPane = editorPane;
@@ -80,8 +80,7 @@ public class StatusBar extends JPanel {
         private int colomn = 0;
 
         private PositionPanel() {
-            super(HitakiEditor.getUIString("position.line") + " 0  " + HitakiEditor.getUIString("position.colomn")
-                    + " 0");
+            super("0 : 0");
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -97,8 +96,7 @@ public class StatusBar extends JPanel {
         }
 
         private void updateData() {
-            setText(HitakiEditor.getUIString("position.line") + " " + line + "  "
-                    + HitakiEditor.getUIString("position.colomn") + " " + colomn);
+            setText(line + " : " + colomn);
         }
     }
 }

@@ -3,12 +3,12 @@ package com.github.uguisu32j.hitakieditor.ui;
 import com.github.uguisu32j.hitakieditor.HitakiEditor;
 
 public enum LangMode {
-    PLAIN;
+    PLAIN_TEXT;
 
     @Override
     public String toString() {
         String mode = switch (this) {
-            case PLAIN -> HitakiEditor.getUIString("lang_mode.plain");
+            case PLAIN_TEXT -> HitakiEditor.getUIString("lang_mode.plain_text");
         };
         return mode;
     }
