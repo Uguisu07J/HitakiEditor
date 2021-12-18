@@ -121,6 +121,11 @@ public class HitakiEditor {
     }
 
     public static String getUIString(String key) {
-        return LANG.getString(key);
+        try {
+            return LANG.getString(key);
+        } catch (MissingResourceException e) {
+            LOGGER.warn("\"" + key + "\" not found (" + SETTINGS.getProperty("lang") + ")");
+            return key;
+        }
     }
 }
