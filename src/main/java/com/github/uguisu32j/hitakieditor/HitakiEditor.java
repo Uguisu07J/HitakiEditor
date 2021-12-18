@@ -81,7 +81,7 @@ public class HitakiEditor {
             try {
                 LANG = ResourceBundle.getBundle("lang/lang", new Locale(SETTINGS.getProperty("lang")));
             } catch (MissingResourceException e) {
-                LOGGER.error("Missing resource", e);
+                LOGGER.error("Failed to load language file", e);
                 return;
             }
             new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
