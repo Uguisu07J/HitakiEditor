@@ -24,6 +24,7 @@ dependencies {
 
 application {
     mainClass = 'com.github.uguisu32j.hitakieditor.HitakiEditor'
+    applicationDefaultJvmArgs = ['-Djava.net.useSystemProxies=true']
 }
 
 jar {
