@@ -24,7 +24,7 @@ dependencies {
 
 application {
     mainClass = 'com.github.uguisu32j.hitakieditor.HitakiEditor'
-    applicationDefaultJvmArgs = ['-Djava.net.useSystemProxies=true']
+    applicationDefaultJvmArgs = ['-Dapple.laf.useScreenMenuBar=true', '-Djava.net.useSystemProxies=true']
 }
 
 jar {
