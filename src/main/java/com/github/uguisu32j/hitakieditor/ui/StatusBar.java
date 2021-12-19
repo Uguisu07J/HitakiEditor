@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ public class StatusBar extends JPanel {
     private CodePane editorPane;
     private PositionPanel positionPanel = new PositionPanel();
     private DataPanel<Charset> encodingPanel = new DataPanel<>(HitakiEditor.getUIString("encoding"),
-            HitakiEditor.getUIString("encoding.select_encoding"), Charset.forName("UTF-8"),
+            HitakiEditor.getUIString("encoding.select_encoding"), StandardCharsets.UTF_8,
             Charset.availableCharsets().values().toArray(Charset[]::new));
     private DataPanel<EndOfLineSeq> endOfLineCharPanel = new DataPanel<>(HitakiEditor.getUIString("end_of_line_seq"),
             HitakiEditor.getUIString("end_of_line_seq.select_end_of_line_seq"), EndOfLineSeq.getDefault(),
