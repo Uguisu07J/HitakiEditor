@@ -31,11 +31,11 @@ import com.github.uguisu32j.hitakieditor.ui.EditorFrame;
 
 public class HitakiEditor {
     public static final String VERSION = "1.0.0";
-    public static final String APP_DATA = getAppData();
+    public static final String APP_DATA_DIR = getAppDataDir();
     public static final HProperties SETTINGS = new HProperties(getDefaultSettings(),
-            Path.of(APP_DATA, "settings.properties"));
+            Path.of(APP_DATA_DIR, "settings.properties"));
     public static final HProperties WINDOW_SIZE = new HProperties(getDefaultWindowSize(),
-            Path.of(APP_DATA, "window_size.properties"));
+            Path.of(APP_DATA_DIR, "window_size.properties"));
     private static ResourceBundle LANG;
     private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
 
@@ -45,11 +45,11 @@ public class HitakiEditor {
                 LOGGER.error("Uncaught Exception", e);
             });
             LOGGER.info("Starting HitakiEditor " + VERSION);
-            if (Files.notExists(Path.of(APP_DATA))) {
+            if (Files.notExists(Path.of(APP_DATA_DIR))) {
                 try {
-                    Files.createDirectories(Path.of(APP_DATA));
+                    Files.createDirectories(Path.of(APP_DATA_DIR));
                 } catch (IOException e) {
-                    LOGGER.error("Failed to create " + APP_DATA, e);
+                    LOGGER.error("Failed to create " + APP_DATA_DIR, e);
                     return;
                 }
             }
@@ -70,7 +70,7 @@ public class HitakiEditor {
                     case "IntelliJ" -> new FlatIntelliJLaf();
                     case "Darcula" -> new FlatDarculaLaf();
                     default -> IntelliJTheme.createLaf(
-                            new BufferedInputStream(Files.newInputStream(Path.of(APP_DATA, "themes", theme))));
+                            new BufferedInputStream(Files.newInputStream(Path.of(APP_DATA_DIR, "themes", theme))));
                 };
                 UIManager.setLookAndFeel(laf);
             } catch (UnsupportedLookAndFeelException | IOException e) {
@@ -88,14 +88,14 @@ public class HitakiEditor {
         });
     }
 
-    private static String getAppData() {
+    private static String getAppDataDir() {
         String home = System.getProperty("user.home");
-        String appData = switch (System.getProperty("os.name")) {
+        String appDataDir = switch (System.getProperty("os.name")) {
             case "Mac OS X" -> home + "/Library/Application Support/HitakiEditor";
             case "Windows" -> System.getenv("APPDATA") + "\\HitakiEditor";
             default -> home + "/.hitakieditor";
         };
-        return appData;
+        return appDataDir;
     }
 
     private static Properties getDefaultSettings() {

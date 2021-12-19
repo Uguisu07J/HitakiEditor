@@ -10,7 +10,7 @@ import ch.qos.logback.core.rolling.TriggeringPolicy;
 
 public class HFileAppender extends FileAppender<TriggeringPolicy<ILoggingEvent>> {
     public HFileAppender() {
-        setFile(HitakiEditor.APP_DATA + File.separator + "logs" + File.separator
+        setFile(HitakiEditor.APP_DATA_DIR + File.separator + "logs" + File.separator
                 + DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss").format(LocalDateTime.now()) + ".log");
     }
 }
