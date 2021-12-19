@@ -61,7 +61,6 @@ public class HitakiEditor {
             } catch (IllegalStateException e) {
                 return;
             }
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
             try {
                 String theme = SETTINGS.getProperty("lookandfeel.theme");
                 LookAndFeel laf = switch (theme) {
