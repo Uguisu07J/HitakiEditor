@@ -15,7 +15,7 @@ import com.github.uguisu32j.hitakieditor.HitakiEditor;
 
 @SuppressWarnings("serial")
 public class StatusBar extends JPanel {
-    private CodePane editorPane;
+    private CodePane codePane;
     private PositionPanel positionPanel = new PositionPanel();
     private DataPanel<Charset> encodingPanel = new DataPanel<>(HitakiEditor.getUIString("encoding"),
             HitakiEditor.getUIString("encoding.select_encoding"), StandardCharsets.UTF_8,
@@ -26,8 +26,8 @@ public class StatusBar extends JPanel {
     private DataPanel<LangMode> langModePanel = new DataPanel<>(HitakiEditor.getUIString("lang_mode"),
             HitakiEditor.getUIString("lang_mode.select_lang_mode"), LangMode.PLAIN_TEXT, LangMode.values());
 
-    public StatusBar(CodePane editorPane) {
-        this.editorPane = editorPane;
+    public StatusBar(CodePane codePane) {
+        this.codePane = codePane;
         setLayout(new FlowLayout(FlowLayout.RIGHT));
         add(positionPanel);
         add(Box.createGlue());
@@ -88,7 +88,7 @@ public class StatusBar extends JPanel {
                     int line = Integer.parseInt(
                             JOptionPane.showInputDialog(null, HitakiEditor.getUIString("position.type_a_line_number"),
                                     HitakiEditor.getUIString("position.go_to_line"), JOptionPane.INFORMATION_MESSAGE));
-                    editorPane.setLine(line);
+                    codePane.setLine(line);
                     PositionPanel.this.line = line;
                     colomn = 0;
                     updateData();
