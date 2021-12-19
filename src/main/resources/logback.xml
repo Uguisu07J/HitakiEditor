@@ -1,10 +1,10 @@
 <configuration>
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+  <appender name="FILE" class="com.github.uguisu32j.hitakieditor.HFileAppender">
     <encoder>
       <pattern>%d{HH:mm:ss} [%thread/%level] %msg%n</pattern>
     </encoder>
   </appender>
   <root level="info">
-    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
   </root>
 </configuration>
