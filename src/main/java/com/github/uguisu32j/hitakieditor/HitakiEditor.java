@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
@@ -83,7 +82,7 @@ public class HitakiEditor {
                 LOGGER.error("Failed to load language file", e);
                 return;
             }
-            new EditorFrame(Arrays.stream(args).map(s -> Path.of(s)).toArray(Path[]::new));
+            new EditorFrame();
         });
     }
 
