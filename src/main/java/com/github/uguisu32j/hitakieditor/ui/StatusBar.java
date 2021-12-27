@@ -41,7 +41,7 @@ public class StatusBar extends JPanel {
     public void setPosition(int line, int colomn) {
         positionPanel.line = line;
         positionPanel.colomn = colomn;
-        positionPanel.updateData();
+        positionPanel.updateText();
     }
 
     public void setMode(LangMode mode) {
@@ -91,12 +91,12 @@ public class StatusBar extends JPanel {
                     codePane.setLine(line);
                     PositionPanel.this.line = line;
                     colomn = 0;
-                    updateData();
+                    updateText();
                 }
             });
         }
 
-        private void updateData() {
+        private void updateText() {
             setText(line + " : " + colomn);
         }
     }
