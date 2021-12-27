@@ -33,12 +33,12 @@ runtime {
         if (currentOS.windows) {
             installerType = 'exe'
             installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
-            // imageOptions = ['--icon', 'icon/HitakiEditor.ico']
+            // imageOptions = ['--icon', 'icons/icon.ico']
         } else if (currentOS.macOsX) {
             installerType = 'dmg'
-            // imageOptions = ['--icon', 'icon/HitakiEditor.icns']
+            imageOptions = ['--icon', 'icons/icon.icns']
         } else if (currentOs.linux) {
-            // imageOptions = ['--icon', 'icon/HitakiEditor.png']
+            imageOptions = ['--icon', 'icons/icon.png']
         }
     }
 }

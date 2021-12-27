@@ -56,7 +56,7 @@ public class HitakiEditor {
                 SETTINGS.load();
                 WINDOW_SIZE.load();
             } catch (IOException e) {
-                LOGGER.warn("Failed to load settings", e);
+                LOGGER.warn("Failed to load settings");
             } catch (IllegalStateException e) {
                 return;
             }
