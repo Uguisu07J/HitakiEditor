@@ -29,12 +29,12 @@ jar {
 
 runtime {
     jpackage {
-        def currentOs = OperatingSystem.current()
-        if(currentOs.windows) {
+        def currentOS = OperatingSystem.current()
+        if (currentOS.windows) {
             installerType = 'exe'
             installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
             // imageOptions = ['--icon', 'icon/HitakiEditor.ico']
-        } else if (currentOs.macOsX) {
+        } else if (currentOS.macOsX) {
             installerType = 'dmg'
             // imageOptions = ['--icon', 'icon/HitakiEditor.icns']
         } else if (currentOs.linux) {
