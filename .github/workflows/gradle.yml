@@ -28,3 +28,4 @@ jobs:
       with:
         name: ${{ matrix.os }}
         path: build/jpackage
+        retention-days: 3
