@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class SettingFrame extends JFrame {
-    private String encodeColor(Color color) {
+    private static String encodeColor(Color color) {
         return String.format("#%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
     }
 }
