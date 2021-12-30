@@ -29,12 +29,12 @@ jar {
 
 runtime {
     jpackage {
-        def currentOS = OperatingSystem.current()
-        if (currentOS.windows) {
+        def os = OperatingSystem.current()
+        if (os.windows) {
             installerType = 'exe'
             installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
             // imageOptions = ['--icon', 'icons/icon.ico']
-        } else if (currentOS.macOsX) {
+        } else if (os.macOsX) {
             installerType = 'dmg'
             imageOptions = ['--icon', 'icons/icon.icns']
         } else if (currentOs.linux) {
