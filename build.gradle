@@ -37,7 +37,7 @@ runtime {
         } else if (os.macOsX) {
             installerType = 'dmg'
             imageOptions = ['--icon', 'icons/icon.icns']
-        } else if (currentOs.linux) {
+        } else {
             imageOptions = ['--icon', 'icons/icon.png']
         }
     }
