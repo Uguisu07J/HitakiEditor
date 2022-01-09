@@ -5,6 +5,9 @@ plugins {
 }
 
 version = '1.0.0'
+archivesBaseName = 'hitakieditor'
+mainClassName = 'com.github.uguisu32j.hitakieditor.HitakiEditor'
+applicationDefaultJvmArgs = ['-Dapple.laf.useScreenMenuBar=true', '-Djava.net.useSystemProxies=true']
 
 repositories {
     mavenCentral()
@@ -15,15 +18,9 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.10'
 }
 
-application {
-    mainClass = 'com.github.uguisu32j.hitakieditor.HitakiEditor'
-    applicationDefaultJvmArgs = ['-Dapple.laf.useScreenMenuBar=true', '-Djava.net.useSystemProxies=true']
-}
-
 jar {
-    archiveBaseName = 'hitakieditor'
     manifest {
-        attributes 'Main-Class': 'com.github.uguisu32j.hitakieditor.HitakiEditor'
+        attributes 'Main-Class': "$mainClassName"
     }
 }
 
