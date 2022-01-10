@@ -1,7 +1,6 @@
 package com.github.uguisu32j.hitakieditor.ui;
 
 import java.awt.Color;
-
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")

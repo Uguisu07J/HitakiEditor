@@ -7,7 +7,7 @@ public enum LangMode {
 
     @Override
     public String toString() {
-        String mode = switch (this) {
+        var mode = switch (this) {
             case PLAIN_TEXT -> HitakiEditor.getUIString("lang_mode.plain_text");
         };
         return mode;

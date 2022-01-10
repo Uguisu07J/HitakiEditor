@@ -4,5 +4,4 @@ import javax.swing.JTabbedPane;
 
 @SuppressWarnings("serial")
 public class HTabbedPane extends JTabbedPane {
-
 }

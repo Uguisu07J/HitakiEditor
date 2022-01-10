@@ -3,7 +3,6 @@ package com.github.uguisu32j.hitakieditor;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.FileAppender;
 import ch.qos.logback.core.rolling.TriggeringPolicy;

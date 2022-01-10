@@ -12,15 +12,11 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
-
-import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -62,7 +58,7 @@ public class HitakiEditor {
             }
             try {
                 String theme = SETTINGS.getProperty("lookandfeel.theme");
-                LookAndFeel laf = switch (theme) {
+                var laf = switch (theme) {
                     case "Light" -> new FlatLightLaf();
                     case "Dark" -> new FlatDarkLaf();
                     case "IntelliJ" -> new FlatIntelliJLaf();
@@ -97,7 +93,7 @@ public class HitakiEditor {
     }
 
     private static Properties getDefaultSettings() {
-        Properties defaults = new Properties();
+        var defaults = new Properties();
         try {
             defaults.load(new BufferedReader(
                     new InputStreamReader(ClassLoader.getSystemResourceAsStream("default_settings.properties"))));
@@ -109,7 +105,7 @@ public class HitakiEditor {
     }
 
     private static Properties getDefaultWindowSize() {
-        Properties defaults = new Properties();
+        var defaults = new Properties();
         Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         defaults.setProperty("editor.x", String.valueOf(rect.x + 100));
         defaults.setProperty("editor.y", String.valueOf(rect.y + 100));

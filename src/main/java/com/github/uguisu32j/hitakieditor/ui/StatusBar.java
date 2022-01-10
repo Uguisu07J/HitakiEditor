@@ -5,12 +5,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import com.github.uguisu32j.hitakieditor.HitakiEditor;
 
 @SuppressWarnings("serial")
@@ -85,7 +83,7 @@ public class StatusBar extends JPanel {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    int line = Integer.parseInt(
+                    var line = Integer.parseInt(
                             JOptionPane.showInputDialog(null, HitakiEditor.getUIString("position.type_a_line_number"),
                                     HitakiEditor.getUIString("position.go_to_line"), JOptionPane.INFORMATION_MESSAGE));
                     codePane.setLine(line);

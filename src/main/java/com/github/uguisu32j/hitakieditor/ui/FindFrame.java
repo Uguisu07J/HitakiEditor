@@ -4,5 +4,4 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class FindFrame extends JFrame {
-
 }
