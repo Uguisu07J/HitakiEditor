@@ -12,6 +12,8 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
+
+import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -36,7 +38,7 @@ public class HitakiEditor {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            Thread.setDefaultUncaughtExceptionHandler((Thread t, Throwable e) -> {
+            Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
                 LOGGER.error("Uncaught Exception", e);
             });
             LOGGER.info("Starting HitakiEditor " + VERSION);
@@ -58,7 +60,7 @@ public class HitakiEditor {
             }
             try {
                 String theme = SETTINGS.getProperty("lookandfeel.theme");
-                var laf = switch (theme) {
+                LookAndFeel laf = switch (theme) {
                     case "Light" -> new FlatLightLaf();
                     case "Dark" -> new FlatDarkLaf();
                     case "IntelliJ" -> new FlatIntelliJLaf();
