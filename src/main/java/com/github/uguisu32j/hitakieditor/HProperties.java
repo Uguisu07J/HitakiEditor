@@ -8,14 +8,16 @@ import java.util.Properties;
 @SuppressWarnings("serial")
 public class HProperties extends Properties {
     private Path path;
+    private boolean defaultsLoaded;
 
-    public HProperties(Properties defaults, Path path) {
+    public HProperties(Path path, Properties defaults, boolean defaultsLoaded) {
         super(defaults);
         this.path = path;
+        this.defaultsLoaded = defaultsLoaded;
     }
 
     public void load() throws IOException {
-        if (defaults == null) {
+        if (defaultsLoaded) {
             throw new IllegalStateException();
         }
         load(Files.newBufferedReader(path));

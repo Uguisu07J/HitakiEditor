@@ -29,10 +29,8 @@ import com.github.uguisu32j.hitakieditor.ui.EditorFrame;
 public class HitakiEditor {
     public static final String VERSION = "1.0.0";
     public static final String APP_DATA_DIR = getAppDataDir();
-    public static final HProperties SETTINGS = new HProperties(getDefaultSettings(),
-            Path.of(APP_DATA_DIR, "settings.properties"));
-    public static final HProperties WINDOW_SIZE = new HProperties(getDefaultWindowSize(),
-            Path.of(APP_DATA_DIR, "window_size.properties"));
+    public static final HProperties SETTINGS = createSettings();
+    public static final HProperties WINDOW_SIZE = createWindowSettings();
     private static ResourceBundle LANG;
     private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
 
@@ -94,26 +92,29 @@ public class HitakiEditor {
         return appDataDir;
     }
 
-    private static Properties getDefaultSettings() {
+    private static HProperties createSettings() {
         var defaults = new Properties();
+        var isDefaultsLoaded = false;
         try {
             defaults.load(new BufferedReader(
                     new InputStreamReader(ClassLoader.getSystemResourceAsStream("default_settings.properties"))));
+            isDefaultsLoaded = true;
         } catch (IOException e) {
             LOGGER.error("Failed to load default settings", e);
-            return null;
         }
-        return defaults;
+        return new HProperties(
+                Path.of(APP_DATA_DIR, "settings.properties"), defaults, isDefaultsLoaded);
     }
 
-    private static Properties getDefaultWindowSize() {
+    private static HProperties createWindowSettings() {
         var defaults = new Properties();
         Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        defaults.setProperty("editor.x", String.valueOf(rect.x + 100));
-        defaults.setProperty("editor.y", String.valueOf(rect.y + 100));
+        defaults.setProperty("editor.x", String.valueOf(rect.x));
+        defaults.setProperty("editor.y", String.valueOf(rect.y));
         defaults.setProperty("editor.width", String.valueOf(rect.width));
         defaults.setProperty("editor.height", String.valueOf(rect.height));
-        return defaults;
+        return new HProperties(
+                Path.of(APP_DATA_DIR, "window_settings.properties"), defaults, true);
     }
 
     public static String getUIText(String key) {
