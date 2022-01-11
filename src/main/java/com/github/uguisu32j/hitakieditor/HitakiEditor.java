@@ -114,7 +114,7 @@ public class HitakiEditor {
         return defaults;
     }
 
-    public static String getUIString(String key) {
+    public static String getUIText(String key) {
         try {
             return LANG.getString(key);
         } catch (MissingResourceException e) {
