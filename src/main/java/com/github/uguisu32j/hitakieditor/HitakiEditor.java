@@ -30,7 +30,7 @@ public class HitakiEditor {
     public static final String VERSION = "1.0.0";
     public static final String APP_DATA_DIR = getAppDataDir();
     public static final HProperties SETTINGS = createSettings();
-    public static final HProperties WINDOW_SIZE = createWindowSettings();
+    public static final HProperties WINDOW_SETTINGS = createWindowSettings();
     private static ResourceBundle LANG;
     private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
 
@@ -50,7 +50,7 @@ public class HitakiEditor {
             }
             try {
                 SETTINGS.load();
-                WINDOW_SIZE.load();
+                WINDOW_SETTINGS.load();
             } catch (IOException e) {
                 LOGGER.warn("Failed to load settings");
             } catch (IllegalStateException e) {
@@ -121,7 +121,7 @@ public class HitakiEditor {
         try {
             return LANG.getString(key);
         } catch (MissingResourceException e) {
-            LOGGER.warn("\"" + key + "\" not found (" + SETTINGS.getProperty("lang") + ")");
+            LOGGER.warn("'" + key + "' not found (" + SETTINGS.getProperty("lang") + ")");
             return key;
         }
     }

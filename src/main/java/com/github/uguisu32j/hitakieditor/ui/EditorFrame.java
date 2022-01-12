@@ -16,10 +16,10 @@ public class EditorFrame extends JFrame {
 
     public EditorFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.x")),
-                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.y")),
-                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.width")),
-                Integer.parseInt(HitakiEditor.WINDOW_SIZE.getProperty("editor.height")));
+        setBounds(Integer.parseInt(HitakiEditor.WINDOW_SETTINGS.getProperty("editor.x")),
+                Integer.parseInt(HitakiEditor.WINDOW_SETTINGS.getProperty("editor.y")),
+                Integer.parseInt(HitakiEditor.WINDOW_SETTINGS.getProperty("editor.width")),
+                Integer.parseInt(HitakiEditor.WINDOW_SETTINGS.getProperty("editor.height")));
         try {
             setIconImage(ImageIO.read(ClassLoader.getSystemResourceAsStream("frameicon.png")));
         } catch (IOException e) {
