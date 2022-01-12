@@ -19,6 +19,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -58,7 +59,7 @@ public class HitakiEditor {
             }
             try {
                 String theme = SETTINGS.getProperty("lookandfeel.theme");
-                LookAndFeel laf = switch (theme) {
+                FlatLaf laf = switch (theme) {
                     case "Light" -> new FlatLightLaf();
                     case "Dark" -> new FlatDarkLaf();
                     case "IntelliJ" -> new FlatIntelliJLaf();
@@ -94,16 +95,16 @@ public class HitakiEditor {
 
     private static HProperties createSettings() {
         var defaults = new Properties();
-        var isDefaultsLoaded = false;
+        var defaultsLoaded = false;
         try {
             defaults.load(new BufferedReader(
                     new InputStreamReader(ClassLoader.getSystemResourceAsStream("default_settings.properties"))));
-            isDefaultsLoaded = true;
+            defaultsLoaded = true;
         } catch (IOException e) {
             LOGGER.error("Failed to load default settings", e);
         }
         return new HProperties(
-                Path.of(APP_DATA_DIR, "settings.properties"), defaults, isDefaultsLoaded);
+                Path.of(APP_DATA_DIR, "settings.properties"), defaults, defaultsLoaded);
     }
 
     private static HProperties createWindowSettings() {
