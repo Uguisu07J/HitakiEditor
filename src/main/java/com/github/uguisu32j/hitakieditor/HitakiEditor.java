@@ -13,7 +13,6 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -49,13 +48,14 @@ public class HitakiEditor {
                     return;
                 }
             }
+            if (SETTINGS.isDefaultsInitalized()) {
+                return;
+            }
             try {
                 SETTINGS.load();
                 WINDOW_SETTINGS.load();
             } catch (IOException e) {
                 LOGGER.warn("Failed to load settings");
-            } catch (IllegalStateException e) {
-                return;
             }
             try {
                 String theme = SETTINGS.getProperty("lookandfeel.theme");
@@ -95,16 +95,16 @@ public class HitakiEditor {
 
     private static HProperties createSettings() {
         var defaults = new Properties();
-        var defaultsLoaded = false;
+        var defaultsInitalized = false;
         try {
             defaults.load(new BufferedReader(
                     new InputStreamReader(ClassLoader.getSystemResourceAsStream("default_settings.properties"))));
-            defaultsLoaded = true;
+            defaultsInitalized = true;
         } catch (IOException e) {
             LOGGER.error("Failed to load default settings", e);
         }
         return new HProperties(
-                Path.of(APP_DATA_DIR, "settings.properties"), defaults, defaultsLoaded);
+                Path.of(APP_DATA_DIR, "settings.properties"), defaults, defaultsInitalized);
     }
 
     private static HProperties createWindowSettings() {
