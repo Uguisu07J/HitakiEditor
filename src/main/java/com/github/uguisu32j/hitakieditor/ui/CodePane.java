@@ -1,19 +1,17 @@
 package com.github.uguisu32j.hitakieditor.ui;
 
 import java.nio.file.Path;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("serial")
 public class CodePane extends JTextPane {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CodePane.class);
     private StatusBar statusBar;
     private Path path;
     private boolean isModified = false;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CodePane.class);
 
     public CodePane(Path path) {
         if (path != null) {
@@ -21,7 +19,6 @@ public class CodePane extends JTextPane {
         }
         this.path = path;
         statusBar = new StatusBar(this);
-
         open();
     }
 
@@ -30,15 +27,12 @@ public class CodePane extends JTextPane {
     }
 
     public void setLine(int line) {
-
     }
 
     private void open() {
-
     }
 
     public void save() {
-
         isModified = false;
     }
 

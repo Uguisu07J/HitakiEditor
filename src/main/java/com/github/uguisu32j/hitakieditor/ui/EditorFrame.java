@@ -1,13 +1,10 @@
 package com.github.uguisu32j.hitakieditor.ui;
 
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.github.uguisu32j.hitakieditor.HitakiEditor;
 
 @SuppressWarnings("serial")
