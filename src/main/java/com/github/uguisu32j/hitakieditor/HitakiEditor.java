@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
@@ -97,10 +99,10 @@ public class HitakiEditor {
         var defaults = new Properties();
         var defaultsInitalized = false;
         try {
-            defaults.load(new BufferedReader(
-                    new InputStreamReader(ClassLoader.getSystemResourceAsStream("default_settings.properties"))));
+            defaults.load(Files
+                    .newBufferedReader(Path.of(ClassLoader.getSystemResource("default_settings.properties").toURI())));
             defaultsInitalized = true;
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             LOGGER.error("Failed to load default settings", e);
         }
         return new HProperties(

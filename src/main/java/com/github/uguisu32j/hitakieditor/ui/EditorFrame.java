@@ -19,7 +19,7 @@ public class EditorFrame extends JFrame {
                 Integer.parseInt(HitakiEditor.WINDOW_SETTINGS.getProperty("editor.width")),
                 Integer.parseInt(HitakiEditor.WINDOW_SETTINGS.getProperty("editor.height")));
         try {
-            setIconImage(ImageIO.read(ClassLoader.getSystemResourceAsStream("frameicon.png")));
+            setIconImage(ImageIO.read(ClassLoader.getSystemResource("frameicon.png")));
         } catch (IOException e) {
             LOGGER.error("Failed to load frame icon", e);
             return;
