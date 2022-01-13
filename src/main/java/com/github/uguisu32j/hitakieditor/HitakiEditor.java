@@ -6,6 +6,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
@@ -15,8 +16,6 @@ import java.util.ResourceBundle;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -24,6 +23,8 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.IntelliJTheme;
 import com.github.uguisu32j.hitakieditor.ui.EditorFrame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HitakiEditor {
     public static final String VERSION = "1.0.0";
@@ -31,7 +32,7 @@ public class HitakiEditor {
     public static final HProperties SETTINGS = createSettings();
     public static final HProperties WINDOW_SETTINGS = createWindowSettings();
     private static ResourceBundle LANG;
-    private static final Logger LOGGER = LoggerFactory.getLogger(HitakiEditor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

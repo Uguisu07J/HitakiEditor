@@ -1,15 +1,16 @@
 package com.github.uguisu32j.hitakieditor.ui;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import com.github.uguisu32j.hitakieditor.HitakiEditor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.github.uguisu32j.hitakieditor.HitakiEditor;
 
 @SuppressWarnings("serial")
 public class EditorFrame extends JFrame {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditorFrame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     public EditorFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
