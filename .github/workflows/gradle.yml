@@ -3,7 +3,7 @@ name: Build with Gradle
 on:
   push:
     tags:
-      - \*
+      - "*"
 
 jobs:
   build:
