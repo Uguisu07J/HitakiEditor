@@ -35,8 +35,8 @@ public class HitakiEditor {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-                LOGGER.error("Uncaught Exception", e);
+            Thread.setDefaultUncaughtExceptionHandler((thread, exception) -> {
+                LOGGER.error("Uncaught Exception", exception);
             });
             LOGGER.info("Starting HitakiEditor " + VERSION);
             if (Files.notExists(Path.of(APP_DATA_DIR))) {
