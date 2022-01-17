@@ -33,7 +33,7 @@ runtime {
         if (os.windows) {
             installerType = 'exe'
             installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
-            // imageOptions = ['--icon', 'icons/icon.ico']
+            imageOptions = ['--icon', 'icons/icon.ico']
         } else if (os.macOsX) {
             installerType = 'dmg'
             imageOptions = ['--icon', 'icons/icon.icns']
