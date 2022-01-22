@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.formdev:flatlaf:1.6.5'
+    implementation 'com.formdev:flatlaf:2.0'
     implementation 'ch.qos.logback:logback-classic:1.2.10'
 }
 
