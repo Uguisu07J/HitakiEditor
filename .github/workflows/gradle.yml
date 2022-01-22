@@ -22,10 +22,15 @@ jobs:
       - name: Run jpackage
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: jpackage
+          arguments: jpackageArchive
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}
-          path: build/jpackage
+          path: |
+            build/jpackage/*.zip
+            build/jpackage/*.tar.gz
+            build/jpackage/*.exe
+            build/jpackage/*.deb
+            build/jpackage/*.rpm
           retention-days: 3

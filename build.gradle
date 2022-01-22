@@ -1,3 +1,6 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import org.gradle.internal.os.OperatingSystem;
 
 plugins {
@@ -5,6 +8,7 @@ plugins {
 }
 
 version = '1.0.0'
+def os = OperatingSystem.current()
 
 repositories {
     mavenCentral()
@@ -29,16 +33,46 @@ jar {
 
 runtime {
     jpackage {
-        def os = OperatingSystem.current()
         if (os.windows) {
             installerType = 'exe'
             installerOptions = ['--win-dir-chooser', '--win-menu', '--win-per-user-install']
             imageOptions = ['--icon', 'icons/icon.ico']
         } else if (os.macOsX) {
-            installerType = 'dmg'
+            skipInstaller = true
             imageOptions = ['--icon', 'icons/icon.icns']
         } else {
             imageOptions = ['--icon', 'icons/icon.png']
         }
     }
 }
+
+tasks.jpackage.doLast {
+    Files.move(Path.of("${buildDir}/jpackage/HitakiEditor-${version}.exe"), Path.of(
+            "${buildDir}/jpackage/HitakiEditor-${version}-Windows.exe"), StandardCopyOption.REPLACE_EXISTING);
+}
+
+task jpackageZip(group: 'build', type: Zip, dependsOn: jpackage) {
+    destinationDirectory = file('build/jpackage')
+    if (os.windows) {
+        from 'build/jpackage/HitakiEditor'
+        into 'HitakiEditor'
+        archiveClassifier = 'Windows'
+    } else if (os.macOsX) {
+        from 'build/jpackage/HitakiEditor.app'
+        into 'HitakiEditor.app'
+        archiveClassifier = 'macOS'
+    }
+}
+
+task jpackageTar(group: 'build', type: Tar, dependsOn: jpackage) {
+    compression = Compression.GZIP
+    archiveExtension = 'tar.gz'
+    destinationDirectory = file('build/jpackage')
+    if (os.linux)  {
+        from 'build/jpackage/HitakiEditor'
+        into 'HitakiEditor'
+        archiveClassifier = 'Linux'
+    }
+}
+
+task jpackageArchive(group: 'build', dependsOn: [jpackageZip, jpackageTar])
