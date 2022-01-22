@@ -47,8 +47,10 @@ runtime {
 }
 
 tasks.jpackage.doLast {
-    Files.move(Path.of("${buildDir}/jpackage/HitakiEditor-${version}.exe"), Path.of(
-            "${buildDir}/jpackage/HitakiEditor-${version}-Windows.exe"), StandardCopyOption.REPLACE_EXISTING);
+    if (os.windows) {
+        Files.move(Path.of("${buildDir}/jpackage/HitakiEditor-${version}.exe"), Path.of(
+                "${buildDir}/jpackage/HitakiEditor-${version}-Windows.exe"), StandardCopyOption.REPLACE_EXISTING);
+    }
 }
 
 task jpackageZip(group: 'build', type: Zip, dependsOn: jpackage) {
