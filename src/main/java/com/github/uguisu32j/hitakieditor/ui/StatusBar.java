@@ -37,37 +37,35 @@ public class StatusBar extends JPanel {
     }
 
     public void setPosition(int line, int colomn) {
-        positionPanel.line = line;
-        positionPanel.colomn = colomn;
-        positionPanel.updateText();
+        positionPanel.setPosition(line, colomn);
     }
 
     public void setMode(LangMode mode) {
-        langModePanel.data = mode;
+        langModePanel.value = mode;
     }
 
     public Charset getEncoding() {
-        return (Charset) encodingPanel.data;
+        return (Charset) encodingPanel.value;
     }
 
     public EndOfLineSeq getEndOfLine() {
-        return (EndOfLineSeq) endOfLineCharPanel.data;
+        return (EndOfLineSeq) endOfLineCharPanel.value;
     }
 
     private class DataPanel<T> extends JLabel {
-        private Object data;
+        private Object value;
 
-        private DataPanel(String type, String message, T data, T[] list) {
-            super(data.toString());
-            this.data = data;
+        private DataPanel(String type, String message, T value, T[] selectionValues) {
+            super(value.toString());
+            this.value = value;
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    Object obj = JOptionPane.showInputDialog(null, message, type, JOptionPane.INFORMATION_MESSAGE, null,
-                            list, DataPanel.this.data);
-                    if (obj != null) {
-                        DataPanel.this.data = obj;
-                        setText(DataPanel.this.data.toString());
+                    Object input = JOptionPane.showInputDialog(null, message, type, JOptionPane.INFORMATION_MESSAGE,
+                            null, selectionValues, DataPanel.this.value);
+                    if (input != null) {
+                        DataPanel.this.value = input;
+                        setText(DataPanel.this.value.toString());
                     }
                 }
             });
@@ -75,9 +73,6 @@ public class StatusBar extends JPanel {
     }
 
     private class PositionPanel extends JLabel {
-        private int line = 0;
-        private int colomn = 0;
-
         private PositionPanel() {
             super("0 : 0");
             addMouseListener(new MouseAdapter() {
@@ -87,14 +82,12 @@ public class StatusBar extends JPanel {
                             JOptionPane.showInputDialog(null, HitakiEditor.getUIText("position.type_a_line_number"),
                                     HitakiEditor.getUIText("position.go_to_line"), JOptionPane.INFORMATION_MESSAGE));
                     codePane.setLine(line);
-                    PositionPanel.this.line = line;
-                    colomn = 0;
-                    updateText();
+                    setPosition(line, 0);
                 }
             });
         }
 
-        private void updateText() {
+        private void setPosition(int line, int colomn) {
             setText(line + " : " + colomn);
         }
     }
